@@ -19,7 +19,39 @@ namespace MazeGame
             }
 
             Console.SetCursorPosition(0, 0);
-            static void TryMove(ConsoleKey key, string[] mapRows)
+
+            bool isGameWon = false;
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            do
+            {
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                TryMove(keyInfo.Key, mapRows);
+
+                if (mapRows[Console.CursorTop][Console.CursorLeft] == '*')
+                {
+                    isGameWon = true;
+                    break;
+                }
+            } while (!isGameWon);
+
+            stopwatch.Stop();
+
+            Console.Clear();
+            if (isGameWon)
+            {
+                Console.WriteLine("Congratulations! You've escaped the maze in {0} seconds.", stopwatch.Elapsed.TotalSeconds);
+            }
+            else
+            {
+                Console.WriteLine("You failed to escape the maze.");
+            }
+        }
+
+        static void TryMove(ConsoleKey key, string[] mapRows)
         {
             int newTop = Console.CursorTop;
             int newLeft = Console.CursorLeft;
@@ -49,5 +81,4 @@ namespace MazeGame
             }
         }
     }
-}
 }
