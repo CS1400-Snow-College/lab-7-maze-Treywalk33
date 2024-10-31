@@ -8,8 +8,16 @@ namespace MazeGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("In this program there will be a maze put on screen with the goal to get to the end.");
+            Console.Clear();
 
+            Console.WriteLine("In this program there will be a maze put on screen with the goal to get to the end.");
+            
+            string[] mapRows = File.ReadAllLines("map.txt");
+
+            foreach (string row in mapRows)
+            {
+                Console.WriteLine(row);
+            }
         }
     }
 }
